@@ -3,6 +3,9 @@ package ru.geekbrains.mvpuser
 import moxy.MvpPresenter
 import ru.geekbrains.data.GitHubUserRepository
 import ru.geekbrains.navigation.CustomRouter
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
+import ru.geekbrains.mvpuser.UserScreen
 
 class UserPresenter(
     private val userLogin: String,
@@ -11,8 +14,21 @@ class UserPresenter(
 ) : MvpPresenter<UserView>() {
 
     override fun onFirstViewAttach() {
-        userRepository
-            .getUserByLogin(userLogin)
-            ?.let(viewState::showUser)
+        updateContent()
+//        userRepository
+//            .getUserByLogin(userLogin)
+//            ?.let(viewState::showUser)
+    }
+
+    private fun updateContent() {
+        userRepository.getUserByLogin(userLogin)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                viewState.showUser(it)
+            },{
+                val errorMessage = it.message
+                //DisplayError
+            })
     }
 }

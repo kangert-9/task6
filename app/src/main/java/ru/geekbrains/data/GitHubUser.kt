@@ -11,6 +11,8 @@ data class GitHubUser(
     val id: String? = null,
     @SerializedName("login")
     val login: String? = null,
+    @SerializedName("name")
+    val name: String? = null,
     @SerializedName("avatar_url")
     val avatarUrl: String? = null,
     @SerializedName("type")
