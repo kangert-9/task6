@@ -8,6 +8,6 @@ import ru.geekbrains.data.DataModel
 interface WordsApi {
 
     @GET("/{word}")
-    fun fetchTranslateByWord(@Path("word") login: String): Observable<List<DataModel>>
+    fun fetchTranslateByWord(@Path("word") login: String): List<DataModel>
 
 }

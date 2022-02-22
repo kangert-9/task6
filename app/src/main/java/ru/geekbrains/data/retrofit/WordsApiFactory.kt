@@ -15,7 +15,7 @@ object WordsApiFactory {
 
     private val gitHubApi: WordsApi by lazy {
         Retrofit.Builder()
-            .baseUrl("https://dictionary.skyeng.ru/api/public/v1/")
+            .baseUrl("https://dictionary.skyeng.ru/api/public/v1")
             .client(
                 OkHttpClient.Builder()
                     .addNetworkInterceptor(

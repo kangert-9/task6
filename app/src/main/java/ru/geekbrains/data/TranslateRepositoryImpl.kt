@@ -7,7 +7,7 @@ class TranslateRepositoryImpl : TranslateRepository {
 
     private val gitHubApi = WordsApiFactory.create()
 
-    override fun fetchTranslateByWord(word: String): Observable<List<DataModel>> {
+    override fun fetchTranslateByWord(word: String): List<DataModel> {
         return gitHubApi.fetchTranslateByWord(word)
     }
 }
