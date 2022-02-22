@@ -1,15 +1,14 @@
 package ru.geekbrains.mvpuser
 
 import moxy.MvpPresenter
-import ru.geekbrains.data.GitHubUserRepository
+import ru.geekbrains.data.TranslateRepository
 import ru.geekbrains.navigation.CustomRouter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
-import ru.geekbrains.mvpuser.UserScreen
 
-class UserPresenter(
-    private val userLogin: String,
-    private val userRepository: GitHubUserRepository,
+class TranslatePresenter(
+    private val word: String,
+    private val wordRepository: TranslateRepository,
     private val router: CustomRouter
 ) : MvpPresenter<UserView>() {
 
@@ -21,11 +20,11 @@ class UserPresenter(
     }
 
     private fun updateContent() {
-        userRepository.getUserByLogin(userLogin)
+        wordRepository.fetchTranslateByWord(word)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                viewState.showUser(it)
+                viewState.showWords(it)
             },{
                 val errorMessage = it.message
                 //DisplayError

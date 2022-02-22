@@ -5,17 +5,17 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.geekbrains.data.retrofit.GitHubApi
+import ru.geekbrains.data.retrofit.WordsApi
 
-object GitHubApiFactory {
+object WordsApiFactory {
 
     private val gson: Gson =
         GsonBuilder()
             .create()
 
-    private val gitHubApi: GitHubApi by lazy {
+    private val gitHubApi: WordsApi by lazy {
         Retrofit.Builder()
-            .baseUrl("https://api.github.com")
+            .baseUrl("https://dictionary.skyeng.ru/api/public/v1/")
             .client(
                 OkHttpClient.Builder()
                     .addNetworkInterceptor(
@@ -28,9 +28,9 @@ object GitHubApiFactory {
             .addCallAdapterFactory(RxJava3CallAdapterFactory.createSynchronous())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
-            .create(GitHubApi::class.java)
+            .create(WordsApi::class.java)
     }
 
 
-    fun create(): GitHubApi = gitHubApi
+    fun create(): WordsApi = gitHubApi
 }

@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ru.geekbrains.App.Navigation.navigatorHolder
 import ru.geekbrains.App.Navigation.router
-import ru.geekbrains.mvpusers.UsersScreen
 import ru.geekbrains.navigation.CustomNavigator
+import ru.geekbrains.word.WordScreen
 
 class MainActivity : AppCompatActivity() {
     private val navigator = CustomNavigator(activity = this, R.id.content)
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
-            router.navigateTo(UsersScreen)
+            router.navigateTo(WordScreen)
         }
     }
 

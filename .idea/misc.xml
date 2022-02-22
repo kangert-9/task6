@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../Library/Android/sdk/platforms/android-31/data/res/layout/auto_complete_list.xml" value="0.12135416666666667" />
+        <entry key="..\:/Users/kange/AndroidStudioProjects/hw1/app/src/main/res/layout/fragment_word.xml" value="0.22" />
+        <entry key="..\:/Users/kange/AndroidStudioProjects/hw1/app/src/main/res/layout/item.xml" value="0.1" />
+        <entry key="..\:/Users/kange/AndroidStudioProjects/hw1/app/src/main/res/layout/view_user.xml" value="0.1403985507246377" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1453125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10416666666666667" />
         <entry key="app/src/main/res/layout/view_user.xml" value="0.25" />
