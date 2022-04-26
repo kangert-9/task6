@@ -1,13 +1,13 @@
 package ru.geekbrains.data.retrofit
 
-import io.reactivex.rxjava3.core.Observable
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.Query
 import ru.geekbrains.data.DataModel
 
 interface WordsApi {
 
-    @GET("/{word}")
-    fun fetchTranslateByWord(@Path("word") login: String): List<DataModel>
+    @GET("words/search")
+    fun searchAsync (@Query("search") wordToSearch: String): Deferred<List<DataModel>>
 
 }

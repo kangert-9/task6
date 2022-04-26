@@ -26,7 +26,7 @@ class TranslateFragment: MvpAppCompatFragment(R.layout.view_translate) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding = ViewTranslateBinding.bind(view)
         viewModel.word = word
-        viewModel.getLiveData().observe(viewLifecycleOwner, { renderData(it) })
+        viewModel.getLiveData().observe(viewLifecycleOwner) { renderData(it) }
         viewModel.getData()
     }
 

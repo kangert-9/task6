@@ -1,28 +1,33 @@
 package ru.geekbrains.mvpuser
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import ru.geekbrains.data.TranslateRepository
-import ru.geekbrains.data.TranslateRepositoryImpl
-import kotlin.random.Random
+import androidx.lifecycle.LiveData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class TranslateViewModel(var word: String): ViewModel() {
 
-    private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
-    private val repositoryImpl: TranslateRepository = TranslateRepositoryImpl()
-    fun getLiveData() = liveDataToObserve
+class TranslateViewModel(var word: String): BaseViewModel<AppState>() {
 
-    fun getData() = getDataFromLocalSource()
-
-    private fun getDataFromLocalSource() {
-        liveDataToObserve.value = AppState.Loading
-        Thread {
-            Thread.sleep(1000)
-            if(Random.nextBoolean()) {
-                liveDataToObserve.postValue(AppState.Success(repositoryImpl.fetchTranslateByWord(word)))
-            } else {
-                liveDataToObserve.postValue(AppState.Error(Exception("нет интернета")))
-            }
-        }.start()
+    private val liveDataForViewToObserve: LiveData<AppState> = _mutableLiveData
+    fun subscribe(): LiveData<AppState> {
+        return liveDataForViewToObserve
     }
+    override fun getData(word: String, isOnline: Boolean) {
+        _mutableLiveData.value = AppState.Loading
+        cancelJob()
+        viewModelCoroutineScope.launch { startInteractor(word, isOnline) }
+    }
+
+    private suspend fun startInteractor(word: String, isOnline: Boolean) =
+        withContext(Dispatchers.IO) {
+            _mutableLiveData.postValue(AppState.Error(Exception("нет интернета")))
+        }
+
+override fun handleError(error: Throwable) {
+    _mutableLiveData.postValue(AppState.Error(error))
+}
+override fun onCleared() {
+    _mutableLiveData.value = AppState.Success(null)
+    super.onCleared()
+}
 }

@@ -9,7 +9,6 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.geekbrains.App
 import ru.geekbrains.R
-import ru.geekbrains.data.TranslateRepositoryFactory
 import ru.geekbrains.databinding.FragmentWordBinding
 
 

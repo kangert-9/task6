@@ -1,7 +1,6 @@
 package ru.geekbrains.word
 
 import moxy.MvpPresenter
-import ru.geekbrains.data.TranslateRepository
 import ru.geekbrains.mvpuser.TranslateScreen
 import ru.geekbrains.navigation.CustomRouter
 
